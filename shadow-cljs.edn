@@ -1,0 +1,26 @@
+;; shadow-cljs configuration
+{:source-paths
+ ["src/dev"
+  "src/main"
+  "src/test"]
+
+ :dependencies
+ [[lilactown/helix "0.1.10"]
+  [cljx-sampling "0.1.0"]
+  [cider/cider-nrepl "0.24.0"]
+  [com.fbeyer/refx "0.0.49"]
+  [org.babashka/sci "0.8.40"]
+  [metosin/malli "0.13.0"]]
+
+ :dev-http {8080 {:root "public"}
+            8081 {:root "out/test"}}
+
+ :builds
+ {:frontend
+  {:target :browser
+   :devtools {:reload-strategy :full
+              :preloads [vagabond.dev]}
+   :modules {:main {:init-fn vagabond.frontend/init}}}
+  :test 
+    {:target :browser-test
+     :test-dir "out/test"}}}
