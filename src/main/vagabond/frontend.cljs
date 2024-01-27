@@ -1,22 +1,26 @@
 (ns vagabond.frontend
-  (:require
-   [helix.core :refer [defnc $]]
-   [helix.hooks :as hooks]
-   [helix.dom :as d]
-   ["react-dom/client" :as rdom]
-   [vagabond.character-sheet :as char-sheet]
-   [vagabond.generator :as char-gen]))
+  (:require ["react" :as react]
+            ["react-dom" :as react-dom]
+            [helix.core :refer [$ defnc]]
+            [helix.dom :as d]
+            [refx.alpha :as refx]))
 
-(defnc greeting "A component to give a greeting"
-  [{:keys [name]}]
-  (d/div "Hello, " (d/strong name) "!"))
+(defnc test-view []
+  (d/div "Hello from HELIX"))
 
-(defnc app [] {:helix/features {:fast-refresh true}}
-  (println "hello")
-  (d/h1 "hello"))
-(defonce root (rdom/createRoot (js/document.getElementById "root")))
 
-(defn init []
-  (.render root ($ app)))
+(defn render []
+  (react-dom/render ($ react/StrictMode ($ test-view))
+                    (.getElementById js/document "app")))
 
-(comment)
+(defn ^:dev/after-load clear-cache-and-render!
+  []
+  ;; The `:dev/after-load` metadata causes this function to be called
+  ;; after shadow-cljs hot-reloads code. We force a UI update by clearing
+  ;; the Reframe subscription cache.
+  (refx/clear-subscription-cache!)
+  (render))
+
+
+(defn ^:export init []
+  (render))
