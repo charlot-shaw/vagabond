@@ -1,9 +1,9 @@
-.calva/*
-.clj-kondo/*
-.direnv/*
-.lsp/*
-.portal/*
+.calva/
+.clj-kondo/
+.direnv/
+.lsp/
+.portal/
 node_modules
-.shadow-cljs/*
-out/*
-public/*
+.shadow-cljs/
+out/
+public/
