@@ -18,6 +18,7 @@
  :builds
  {:frontend
   {:target :browser
+   :source-map true
    :devtools {:reload-strategy :full
               :preloads [vagabond.dev]}
    :modules {:main {:init-fn vagabond.frontend/init}}}

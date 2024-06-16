@@ -1,17 +1,18 @@
 (ns vagabond.frontend
-  (:require ["react" :as react]
-            ["react-dom" :as react-dom]
-            [helix.core :refer [$ defnc]]
-            [helix.dom :as d]
-            [refx.alpha :as refx]))
+  (:require
+   [vagabond.components :as vcomp]
+   ["react-dom/client" :as react-dom]
+   [helix.core :refer [$ defnc]]
+   [helix.dom :as d]
+   [refx.alpha :as refx]
+   [vagabond.events :as v-event]))
 
-(defnc test-view []
-  (d/div "Hello from HELIX"))
+(refx/dispatch-sync [::v-event/init-db])
 
+(defonce root (react-dom/createRoot (js/document.getElementById "root")))
 
 (defn render []
-  (react-dom/render ($ react/StrictMode ($ test-view))
-                    (.getElementById js/document "app")))
+  (.render root ($ vcomp/sheet-layout)))
 
 (defn ^:dev/after-load clear-cache-and-render!
   []
