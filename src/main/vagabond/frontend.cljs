@@ -5,7 +5,8 @@
    [helix.core :refer [$ defnc]]
    [helix.dom :as d]
    [refx.alpha :as refx]
-   [vagabond.events :as v-event]))
+   [vagabond.events :as v-event]
+   [vagabond.subs :as v-subs]))
 
 (refx/dispatch-sync [::v-event/init-db])
 
