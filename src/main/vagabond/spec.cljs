@@ -17,11 +17,22 @@
    [::int NatInt]
    [::cha NatInt]])
 
+
+(def Item 
+  [:map 
+   [::slots-taken [:int {:min 1}]]
+   [::name NonEmptyString]
+   [::description {:optional true} :string]
+   [::armor {:optional true} NatInt]
+   [::attack {:optional true} NonEmptyString]
+   [::range {:optional true} NonEmptyString]])
+
 (def Character 
   [:map 
    [::name NonEmptyString]
    [::level NatInt]
-   [::stats Stats]])
+   [::stats Stats]
+   [::inventory [:sequential Item]]])
 
 (def Database 
   [:map 
